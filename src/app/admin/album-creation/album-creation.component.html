@@ -1,0 +1,17 @@
+<p>album-creation works!</p>
+
+<br/>
+<h1 style="text-align: center;">Ajouter un album</h1>
+<hr/>
+<br/>
+<div class="formulaire">
+<form class="form-horizontal" #f>
+    <div class="form-groupe">
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control" [(ngModel)]="album.name" name="nom" required/>
+    </div>
+
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="registerAlbum()">Ajouter</button>
+    
+</form>
+</div>

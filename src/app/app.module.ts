@@ -21,6 +21,7 @@ import { BasicAuthHtppInterceptorService } from './services/interceptors/basic-a
 import { AdminAlbumComponent } from './admin/admin-album/admin-album.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { Admin } from './models/admin';
+import { AlbumCreationComponent } from './admin/album-creation/album-creation.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { Admin } from './models/admin';
     AlbumComponent,
     AdminAlbumComponent,
     AdminDashboardComponent,
+    AlbumCreationComponent,
   ],
   imports: [
     BrowserModule,

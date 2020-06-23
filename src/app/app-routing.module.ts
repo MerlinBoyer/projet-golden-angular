@@ -7,6 +7,7 @@ import { AlbumComponent } from './public/album/album.component';
 import { AdminGuard } from './auth/admin.guard';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminAlbumComponent } from './admin/admin-album/admin-album.component';
+import { AlbumCreationComponent } from './admin/album-creation/album-creation.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
 
 
   {path : 'admin/dashboard',       component:AdminDashboardComponent, canActivate:[AdminGuard]},
-  {path : 'admin/album',       component:AdminAlbumComponent, canActivate:[AdminGuard]},
+  {path : 'admin/album',           component:AdminAlbumComponent, canActivate:[AdminGuard]},
+  {path : 'admin/createAlbum',     component:AlbumCreationComponent, canActivate:[AdminGuard]},
 ];
 
 @NgModule({
