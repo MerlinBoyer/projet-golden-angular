@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-
+import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 
 import { HomeComponent } from './public/home/home.component';
 import { FooterComponent } from './footer/footer.component';
@@ -21,7 +22,7 @@ import { BasicAuthHtppInterceptorService } from './services/interceptors/basic-a
 import { AdminAlbumComponent } from './admin/admin-album/admin-album.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { Admin } from './models/admin';
-import { AlbumCreationComponent } from './admin/album-creation/album-creation.component';
+import { AlbumCreationComponent, AlbumPopup } from './admin/album-creation/album-creation.component';
 
 
 @NgModule({
@@ -38,20 +39,24 @@ import { AlbumCreationComponent } from './admin/album-creation/album-creation.co
     AdminAlbumComponent,
     AdminDashboardComponent,
     AlbumCreationComponent,
+    AlbumPopup
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     Admin,
     AdminGuard,
     {
       provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true
-    }
-
+    },
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]
 })

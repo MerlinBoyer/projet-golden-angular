@@ -4,14 +4,49 @@
 <h1 style="text-align: center;">Ajouter un album</h1>
 <hr/>
 <br/>
-<div class="formulaire">
-<form class="form-horizontal" #f>
+<div class="formulaire" >
+<form class="form-horizontal" ngNativeValidate #f>
+
     <div class="form-groupe">
         <label for="nom">Nom</label>
-        <input type="text" class="form-control" [(ngModel)]="album.name" name="nom" required/>
+        <input type="text" class="form-control" [(ngModel)]="album.name" name="nom" />
     </div>
 
-    <button class="btn btn-outline-success my-2 my-sm-0" (click)="registerAlbum()">Ajouter</button>
+    <br>
+
+    <div class="form-groupe">
+        <label for="visibility">Visibilité</label>
+        <form [formGroup]="visibilityForm">
+            <select formControlName="state" name="visibility">
+            <option *ngFor="let state of visibilityStates" [ngValue]="state.value" onChange=onChangeForm()>
+                {{ state.name }}
+            </option>
+            </select>
+        </form>
+        <br>
+        <div *ngIf="visibilityForm.get('state').value === 0">
+           <label for="code">Code d'acces</label>
+           <input type="text" class="form-control" [(ngModel)]="album.code" name="code"/>
+       </div>
+    </div>
+
+    <br>
+
+    <div class="form-groupe">
+        <label for="description">Description</label>
+        <input type="text-area" class="form-control" [(ngModel)]="album.description" name="description"/>
+    </div>
+
+    <div class="form-groupe">
+        <label for="photos">Photos</label>
+        <input type="file" multiple (change)="onFilesChange($event)" name="photos"/>
+    </div>
+
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="UserCheckBeforeSending()">Ajouter</button>
     
 </form>
+</div>
+
+<div class="lazy-loader" *ngIf="loading loadingTemplate">
+    <div>Loading...</div>
 </div>

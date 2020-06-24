@@ -3,7 +3,7 @@ import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http'
  
 @Injectable({
   providedIn: 'root'
-})
+}) 
 export class BasicAuthHtppInterceptorService implements HttpInterceptor {
  
   constructor() { }
