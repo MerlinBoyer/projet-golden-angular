@@ -22,7 +22,9 @@ import { BasicAuthHtppInterceptorService } from './services/interceptors/basic-a
 import { AdminAlbumComponent } from './admin/admin-album/admin-album.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { Admin } from './models/admin';
-import { AlbumCreationComponent, AlbumPopup } from './admin/album-creation/album-creation.component';
+import { AlbumCreationComponent, AlbumPopup, YouhouPopup } from './admin/album-creation/album-creation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { AlbumCreationComponent, AlbumPopup } from './admin/album-creation/album
     AdminAlbumComponent,
     AdminDashboardComponent,
     AlbumCreationComponent,
-    AlbumPopup
+    AlbumPopup,
+    YouhouPopup
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,9 @@ import { AlbumCreationComponent, AlbumPopup } from './admin/album-creation/album
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    FlashMessagesModule.forRoot(),
   ],
   providers: [
     Admin,
@@ -58,6 +63,10 @@ import { AlbumCreationComponent, AlbumPopup } from './admin/album-creation/album
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    AlbumPopup,
+    YouhouPopup
+  ]
 })
 export class AppModule { }

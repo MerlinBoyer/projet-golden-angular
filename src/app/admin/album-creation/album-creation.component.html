@@ -1,15 +1,17 @@
-<p>album-creation works!</p>
 
-<br/>
-<h1 style="text-align: center;">Ajouter un album</h1>
+<div class="component-title">
+    <img src="../../../assets/img/add-album.png">
+    <h1>Créer un nouvel album</h1>
+</div>
+
 <hr/>
 <br/>
 <div class="formulaire" >
-<form class="form-horizontal" ngNativeValidate #f>
+<form class="md-form" ngNativeValidate #f>
 
     <div class="form-groupe">
         <label for="nom">Nom</label>
-        <input type="text" class="form-control" [(ngModel)]="album.name" name="nom" />
+        <input type="text" class="form-control" [(ngModel)]="album.name" name="nom" required/>
     </div>
 
     <br>
@@ -17,7 +19,7 @@
     <div class="form-groupe">
         <label for="visibility">Visibilité</label>
         <form [formGroup]="visibilityForm">
-            <select formControlName="state" name="visibility">
+            <select formControlName="state" class="form-control" name="visibility">
             <option *ngFor="let state of visibilityStates" [ngValue]="state.value" onChange=onChangeForm()>
                 {{ state.name }}
             </option>
@@ -26,7 +28,7 @@
         <br>
         <div *ngIf="visibilityForm.get('state').value === 0">
            <label for="code">Code d'acces</label>
-           <input type="text" class="form-control" [(ngModel)]="album.code" name="code"/>
+           <input type="text" class="form-control" [(ngModel)]="album.code" name="code" required/>
        </div>
     </div>
 
@@ -37,16 +39,40 @@
         <input type="text-area" class="form-control" [(ngModel)]="album.description" name="description"/>
     </div>
 
+    <!-- <div class="form-groupe">
+        <label for="photos">Photos</label>
+        <input type="file" class="btn btn-outline-secondary" multiple (change)="onFilesChange($event)" name="photos"/>
+    </div> -->
+    <br>
     <div class="form-groupe">
         <label for="photos">Photos</label>
-        <input type="file" multiple (change)="onFilesChange($event)" name="photos"/>
-    </div>
+        <div class="custom-file">
+            <input type="file" multiple  required (change)="onFilesChange($event)" class="custom-file-input" id="photos"
+                aria-describedby="inputGroupFileAddon01">
+            <label class="custom-file-label" for="photos" *ngIf="selectedFiles.length === 0;else nbPictures">
+                Choose pictures
+            </label>
+            <ng-template #nbPictures >
+                <label class="custom-file-label" for="photos" id="photos-selected">
+                    {{selectedFiles.length}} pictures selected
+                </label>
+            </ng-template>
+        </div>
+      </div>
+    
+    <br>
 
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="UserCheckBeforeSending()">Ajouter</button>
+    <div class="submit-btn">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="UserCheckBeforeSending()">Ajouter</button>
+    </div>
     
 </form>
 </div>
 
-<div class="lazy-loader" *ngIf="loading loadingTemplate">
-    <div>Loading...</div>
-</div>
+
+<div class="loader-popup" *ngIf="loading loadingTemplate">
+    
+    <span class="loader-text" id="myPopup">
+        Please Wait :)  currently saving pic : {{currentPicToSend + 1}} / {{selectedFiles.length}} 
+    </span>
+  </div>

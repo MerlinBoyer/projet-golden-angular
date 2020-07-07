@@ -1,1 +1,45 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* 
+    Header
+*/
+header {
+    padding-top: 10px;
+}
+.header h1 {
+    font-size: 50px;
+}
+.header h3 {
+    font-size: 20px;
+    font-style: italic;
+}
+
+
+/* 
+    Component
+ */
+.component-title {
+    text-align: center;
+    padding-top: 25px;
+}
+.component-title img {
+    width: 50px;
+}
+
+.formulaire form label{
+    margin-left: 8px;
+}
+.formulaire {
+    padding: 0% 10%;
+}
+.submit-btn {
+    text-align: center;
+}
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
