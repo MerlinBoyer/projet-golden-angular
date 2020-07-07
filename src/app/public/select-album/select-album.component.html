@@ -1,0 +1,25 @@
+<div class="component-title">
+    <img src="../../../assets/img/add-album.png">
+    <h1>Les albums de Manon</h1>
+    <hr/>
+    <br/>
+</div>
+
+chercher un album par nom
+<div class="form-groupe">
+    <label for="nom">Nom d'un album</label>
+    <input type="text" class="form-control" [(ngModel)]="searchName" name="nom" required/>
+    <button class="btn btn-outline-success" (click)="searchAlbumByName()">Chercher cet album</button>
+
+</div>
+
+
+j'affiche un tableau des albums avec des infos
+quand on clique dessus ça charge l'album
+
+
+<div class="album-container">
+
+<app-album-card *ngFor="let album of albumList" [alb]="album"></app-album-card>
+
+</div>

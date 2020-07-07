@@ -1,0 +1,17 @@
+<div class="component-title">
+    <h1>Je suis un album</h1>
+    <hr/>
+    <br/>
+</div>
+
+telecharger l'album
+voir les cards avec les photos
+clicker sur une photo l'affiche en grand
+télécharger une photo
+
+
+<div class="row itemsBlock album-container">
+    <div *ngFor="let pic of album.pictures" class="col-md-4 col-sm-6 col-12">
+         <app-pic-card [inputPic]="pic"></app-pic-card>
+    </div>
+ </div>

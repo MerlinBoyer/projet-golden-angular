@@ -9,22 +9,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
 
-import { HomeComponent } from './public/home/home.component';
+import { HomeComponent }   from './public/home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './auth/login/login.component';
+import { LoginComponent }  from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { RegisterAdminComponent } from './auth/register-admin/register-admin.component';
-import { AlbumComponent } from './public/album/album.component';
-import { AdminGuard } from './auth/admin.guard';
+import { AdminGuard }      from './auth/admin.guard';
 import { BasicAuthHtppInterceptorService } from './services/interceptors/basic-auth-http-interceptor.service';
-import { AdminAlbumComponent } from './admin/admin-album/admin-album.component';
-import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { Admin } from './models/admin';
+import { AdminAlbumComponent }             from './admin/admin-album/admin-album.component';
+import { AdminDashboardComponent }         from './admin/admin-dashboard/admin-dashboard.component';
+import { Admin }  from './models/admin';
 import { AlbumCreationComponent, AlbumPopup, YouhouPopup } from './admin/album-creation/album-creation.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FontAwesomeModule }    from '@fortawesome/angular-fontawesome';
+import { FlashMessagesModule }  from 'angular2-flash-messages';
+import { PrintAlbumComponent }  from './public/print-album/print-album.component';
+import { PicCardComponent }     from './public/pic-card/pic-card.component';
+import { SelectAlbumComponent } from './public/select-album/select-album.component';
+import { AdminAllAlbumsComponent }  from './admin/admin-all-albums/admin-all-albums.component';
+import { AdminPicCardComponent }    from './admin/admin-pic-card/admin-pic-card.component';
+import { AlbumCardComponent }       from './public/album-card/album-card.component';
 
 
 @NgModule({
@@ -37,12 +42,17 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     LoginComponent,
     LogoutComponent,
     RegisterAdminComponent,
-    AlbumComponent,
     AdminAlbumComponent,
     AdminDashboardComponent,
     AlbumCreationComponent,
     AlbumPopup,
-    YouhouPopup
+    YouhouPopup,
+    PrintAlbumComponent,
+    PicCardComponent,
+    SelectAlbumComponent,
+    AdminAllAlbumsComponent,
+    AdminPicCardComponent,
+    AlbumCardComponent
   ],
   imports: [
     BrowserModule,

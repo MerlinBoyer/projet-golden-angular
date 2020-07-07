@@ -1,0 +1,42 @@
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Album } from '../models/album';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PublicService {
+
+  url: String = environment.urlAPI + '/public';
+  savedAlbum: Album;
+
+  constructor(private http: HttpClient) { }
+
+
+  getAllAlbums(): Observable<any> {
+    return this.http.get(this.url + '/album/getAll');
+  }
+
+  saveAlbum(album: Album) {
+    this.savedAlbum = album;
+  }
+
+  getSavedAlbum() {
+    return this.savedAlbum;
+  }
+
+  getAlbumById(id: number): Observable<any>  {
+    return this.http.get(this.url + '/album/' + id);
+  }
+
+  getPhotoById(id:number): Observable<any> {
+    return this.http.get(this.url + '/photos/' + id);
+  }
+
+  getImgById(id: number): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.get(this.url + '/photos/getImg/' + id, {headers, responseType: 'blob' });
+  }
+}

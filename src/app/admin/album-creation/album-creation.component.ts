@@ -8,7 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 
-// input data to inject in youhoupopup
+// input data to be injected in youhoupopup
 export interface DialogData {
   msg: string;
 }

@@ -6,15 +6,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* 
     Header
 */
-header {
+.header {
     padding-top: 10px;
+    text-align: center;
+    padding-bottom: 10px;
 }
-.header h1 {
+.header-title h1 {
     font-size: 50px;
 }
-.header h3 {
+.header-title h3 {
     font-size: 20px;
     font-style: italic;
+}
+.header img {
+    width: 50px;
 }
 
 
@@ -38,6 +43,11 @@ header {
 .submit-btn {
     text-align: center;
 }
+
+
+/*
+    footer
+*/
 .page-footer {
     position: fixed;
     bottom: 0;

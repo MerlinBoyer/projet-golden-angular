@@ -1,0 +1,17 @@
+<!-- <div class="component-title">
+    <h1>Je suis une carte de photo</h1>
+    <hr/>
+    <br/>
+</div>
+
+j'affiche la photo en petit avec des infos
+j'ai un bouton telecharger
+j'affiche la photo en grand quand on me clique dessus -->
+
+
+<div class="picture-card" (click)="onClick()">
+    <img [src]="imgUrl" *ngIf="imgUrl !== undefined; else whileLoading">
+    <ng-template #whileLoading>
+        <img src="../../../assets/img/golden.png" >
+    </ng-template>
+</div>
