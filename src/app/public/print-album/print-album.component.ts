@@ -1,6 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { PublicService } from 'src/app/services/public.service';
 import { Album } from 'src/app/models/album';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router } from '@angular/router';
+import { Photo } from 'src/app/models/photo';
+import { environment } from 'src/environments/environment';
+
+
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37,
+  ESC = 27
+}
+
 
 @Component({
   selector: 'app-print-album',
@@ -10,18 +22,119 @@ import { Album } from 'src/app/models/album';
 export class PrintAlbumComponent implements OnInit {
 
   album: Album;
-  constructor(private publicService: PublicService) { }
+  bigPicPath: String;
+  bigPicIndex: number;
+  loading: boolean;
+  constructor(private publicService: PublicService,
+    private _flashMessagesService: FlashMessagesService,
+    private router: Router) { }
 
-  ngOnInit(): void {
-    this.album = this.publicService.getSavedAlbum();
-    // if needed, get album id in session and get it from API
-    if(this.album == null || this.album == undefined) {
-      this.publicService.getAlbumById(parseInt(sessionStorage.getItem('savedAlbumId'))).subscribe( res => {
-        this.album = res;
-        console.log(this.album);
-        
-      })
+    @HostListener('window:keyup', ['$event'])
+    keyEvent(event: KeyboardEvent) {
+      if(!this.bigPicPath){
+        return;
+      }
+      if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+        this.goNext();
+      }
+      if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+        this.goPrevious();
+      }
+      if (event.keyCode === KEY_CODE.ESC) {
+        this.closeBigPic();
+      }
     }
+    
+  ngOnInit(): void {
+    this.loading = false;
+    this.bigPicPath = null;
+    this.album = this.publicService.getSavedAlbum();
+    if( this.album && this.album.pictures && this.album.pictures.length !== 0) {
+      return;
+    }
+
+    // if needed, get album id
+    var id: number;
+    if(this.album == null || this.album == undefined) {
+      id = parseInt(sessionStorage.getItem('savedAlbumId'));
+    } else {
+      id = this.album.id;
+    }
+    
+    // if needed, get album code
+    var code: String;
+    if (this.album && this.album.visibility === 0) {
+      code = this.retrieveCode();
+    } else {
+      code = 'default-code';
+    }
+
+    //finally get album from api
+    this.requestAlbum(id, code);
+  }
+
+  ngAfterViewInit() {
+    console.log("all loaded");
+  }
+
+
+  retrieveCode(): String {
+    var code: String = "";
+    if(this.album.code !== null && this.album.code !== undefined && this.album.code !== '') {
+      code = this.album.code;
+    }
+    if( code === "") {
+      code = sessionStorage.getItem('savedAlbumCode');
+    }
+    return code;
+  }
+
+  requestAlbum(id, code) {
+    if(!id || !code) {
+      this._flashMessagesService.show("Mauvais code, rééssayez", { cssClass: 'alert-danger', timeout: 3000 });
+      this.router.navigate(['/public/selectAlbum']);
+    }
+    // retrieve album with code (can be null)
+    this.publicService.getAlbumById(id, code).subscribe( res => {
+      if(res === null){
+        this._flashMessagesService.show("Mauvais code, rééssayez", { cssClass: 'alert-danger', timeout: 5000 });
+        this.router.navigate(['/public/selectAlbum']);
+      }
+      this.album = res;
+      console.log(this.album);
+    })
+  }
+
+  
+
+
+  showBigPic(index: number) {
+    // get pic in album
+    var p = this.album.pictures[index];
+    this.bigPicIndex = index;
+    // generate img url
+    if( !this.album.code ) {
+      this.album.code = 'default-code';
+    }
+    this.bigPicPath = environment.urlAPI + "/public/photos/getImg/" + p.id + '/' + this.album.code;
+    this.loading = true;
+  }
+  closeBigPic() {
+    this.bigPicPath = null;
+    this.bigPicIndex = null;
+  }
+
+  goNext() {
+    this.bigPicIndex = this.bigPicIndex === this.album.pictures.length -1 ? this.bigPicIndex : this.bigPicIndex+1;
+    this.showBigPic(this.bigPicIndex);
+  }
+  goPrevious() {
+    this.bigPicIndex = this.bigPicIndex === 0 ? this.bigPicIndex : this.bigPicIndex-1;
+    this.showBigPic(this.bigPicIndex);
+  }
+
+  whenLoaded() {
+    this.loading = false;
   }
 
 }

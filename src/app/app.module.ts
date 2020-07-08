@@ -29,7 +29,7 @@ import { PicCardComponent }     from './public/pic-card/pic-card.component';
 import { SelectAlbumComponent } from './public/select-album/select-album.component';
 import { AdminAllAlbumsComponent }  from './admin/admin-all-albums/admin-all-albums.component';
 import { AdminPicCardComponent }    from './admin/admin-pic-card/admin-pic-card.component';
-import { AlbumCardComponent }       from './public/album-card/album-card.component';
+import { AlbumCardComponent, PopupAlbumCode }       from './public/album-card/album-card.component';
 
 
 @NgModule({
@@ -52,7 +52,8 @@ import { AlbumCardComponent }       from './public/album-card/album-card.compone
     SelectAlbumComponent,
     AdminAllAlbumsComponent,
     AdminPicCardComponent,
-    AlbumCardComponent
+    AlbumCardComponent,
+    PopupAlbumCode,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +64,7 @@ import { AlbumCardComponent }       from './public/album-card/album-card.compone
     MatDialogModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    FlashMessagesModule.forRoot(),
+    FlashMessagesModule.forRoot()
   ],
   providers: [
     Admin,

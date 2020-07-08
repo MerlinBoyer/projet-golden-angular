@@ -1,3 +1,9 @@
-<div class="album-card" (click)="printAlbum()">
+<div class="album-card" (click)="onClicked()" *ngIf="album.visibility !== 0; else privateAlbumInstead">
     Album {{album.name}}
 </div>
+
+<ng-template #privateAlbumInstead>
+    <div class="album-card private" (click)="onClicked()" >
+        {{album.name}}
+    </div>
+</ng-template>

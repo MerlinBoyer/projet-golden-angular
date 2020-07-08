@@ -11,6 +11,7 @@ export class PublicService {
 
   url: String = environment.urlAPI + '/public';
   savedAlbum: Album;
+  albumCode: string;
 
   constructor(private http: HttpClient) { }
 
@@ -27,16 +28,25 @@ export class PublicService {
     return this.savedAlbum;
   }
 
-  getAlbumById(id: number): Observable<any>  {
-    return this.http.get(this.url + '/album/' + id);
+  getAlbumById(id: number, code: String): Observable<any>  {
+    if(code === '') {
+      code='public';
+    }
+    return this.http.get(this.url + '/album/' + id + '/' + code);
   }
 
-  getPhotoById(id:number): Observable<any> {
-    return this.http.get(this.url + '/photos/' + id);
+  getPhotoById(id:number, code: String): Observable<any> {
+    if(code === '') {
+      code='public';
+    }
+    return this.http.get(this.url + '/photos/' + id + '/' + code);
   }
 
-  getImgById(id: number): Observable<any> {
+  getImgById(id: number, code: String): Observable<any> {
+    if(code === '') {
+      code='public';
+    }
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get(this.url + '/photos/getImg/' + id, {headers, responseType: 'blob' });
+    return this.http.get(this.url + '/photos/getImg/' + id + '/' + code, {headers, responseType: 'blob' });
   }
 }
