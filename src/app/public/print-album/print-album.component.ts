@@ -73,10 +73,6 @@ export class PrintAlbumComponent implements OnInit {
     this.requestAlbum(id, code);
   }
 
-  ngAfterViewInit() {
-    console.log("all loaded");
-  }
-
 
   retrieveCode(): String {
     var code: String = "";
