@@ -1,2 +1,69 @@
-<h1>albums</h1>
+<div class="component-title">
+    <h1>{{album.name}}</h1>
+    <h3>{{album.creation_date | date: 'dd-MM-yyyy'}}</h3>
+    <h3 *ngIf="lazy_album.pictures.length != album.pictures.length">Loading pic : {{lazy_album.pictures.length}} / {{album.pictures.length}}</h3>
+    <hr/>
+    <br/>
+</div>
 
+<button class="btn btn-outline-danger my-2 my-sm-0" type="button"  [routerLink]="[ '/admin/allAlbums']"><- Retour aux albums</button>
+<br>
+ADMIN DE L'ALBUM
+
+<div class="album-infos">
+    <form class="md-form" ngNativeValidate #f>
+
+        <div class="form-groupe">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" [(ngModel)]="album.name" name="nom"/>
+        </div>
+    
+        <br>
+    
+        <div class="form-groupe">
+            <label for="visibility">Visibilité</label>
+            <form [formGroup]="visibilityForm">
+                <select formControlName="state" class="form-control" name="visibility">
+                <option *ngFor="let state of visibilityStates" [ngValue]="state.value" onChange=onChangeForm()>
+                    {{ state.name }}
+                </option>
+                </select>
+            </form>
+            <br>
+            <div *ngIf="visibilityForm.get('state').value === 0">
+               <label for="code">Code d'acces</label>
+               <input type="text" class="form-control" [(ngModel)]="album.code" name="code" required/>
+           </div>
+        </div>
+    
+        <br>
+    
+        <div class="form-groupe">
+            <label for="description">Description</label>
+            <input type="text-area" class="form-control" [(ngModel)]="album.description" name="description"/>
+        </div>
+    
+        <div class="submit-btn">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="updateName()">Update</button>
+            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="delete()">Delete</button>
+        </div>
+        
+    </form>
+</div>
+
+
+<div class="row itemsBlock album-container">
+    <div *ngFor="let pic of lazy_album.pictures; index as i" class="col-md-4 col-sm-6 col-12">
+         <app-admin-pic-card [inputPic]="pic" [albumCode]="album.code" (click)="showBigPic(i)" (notifyParent)="notificationReceived($event)"></app-admin-pic-card>
+    </div>
+ </div>
+
+<div *ngIf="bigPicPath">
+    <div class="big-pic-container">
+        <img *ngIf="loading" src="../../../assets/img/loading-golden.png" alt="loading" />
+        <img [hidden]="loading" class="big-pic" (load)="whenLoaded()" [src]="bigPicPath" />
+    </div>
+    <span class="close" (click)="closeBigPic()"></span>
+    <span class="arrow previous round" (click)="goPrevious()">&#8249;</span>
+    <span class="arrow next round" (click)="goNext()">&#8250;</span>
+</div>

@@ -1,0 +1,14 @@
+.picture-card img {
+    width: 200px;
+}
+
+.picture-card {
+    border: 2px solid black;
+    border-radius: 2px;
+    margin: 2% 2% 2% 2%;
+    display: inline-table;
+}
+.picture-card:hover{
+    background-color: grey;
+    cursor: pointer;
+}

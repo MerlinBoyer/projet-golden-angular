@@ -30,6 +30,8 @@ import { SelectAlbumComponent } from './public/select-album/select-album.compone
 import { AdminAllAlbumsComponent }  from './admin/admin-all-albums/admin-all-albums.component';
 import { AdminPicCardComponent }    from './admin/admin-pic-card/admin-pic-card.component';
 import { AlbumCardComponent, PopupAlbumCode }       from './public/album-card/album-card.component';
+import { AlbumCardComponent as AdminAlbumCardComponent }       from './admin/album-card/album-card.component';
+
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { AlbumCardComponent, PopupAlbumCode }       from './public/album-card/al
     AdminAllAlbumsComponent,
     AdminPicCardComponent,
     AlbumCardComponent,
+    AdminAlbumCardComponent,
     PopupAlbumCode,
   ],
   imports: [

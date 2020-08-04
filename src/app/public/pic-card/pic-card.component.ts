@@ -1,12 +1,20 @@
-import { Component, OnInit, Input, SecurityContext, HostListener } from '@angular/core';
+import { Component, OnInit, Input, SecurityContext, HostListener, Output } from '@angular/core';
 import { Photo } from 'src/app/models/photo';
 import { PublicService } from 'src/app/services/public.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { EventEmitter } from '@angular/core';
 
 var base64data;
 let mySrc;
 
+
+
+/*
+* Ce compo prend en param une id d'une pic et genere une src de <img>
+* dans le navigateur qui va telecharger l'image depuis le serveur.
+* lorsque l'image est chargée le comp parent (print-album) est notifié
+*/
 @Component({
   selector: 'app-pic-card',
   templateUrl: './pic-card.component.html',
@@ -19,6 +27,7 @@ export class PicCardComponent implements OnInit {
   loading: boolean;
   @Input() inputPic: Photo;
   @Input() albumCode: string;
+  @Output() notifyParent = new EventEmitter();
 
   constructor(private service: PublicService, private sanitizer : DomSanitizer) { }
 
@@ -37,6 +46,9 @@ export class PicCardComponent implements OnInit {
   }
 
   loadPic() {
+    if( this.inputPic.id === 0) {
+      return;
+    }
     this.service.getPhotoById( this.inputPic.id, this.albumCode ).subscribe( res => {
       this.pic = res;
     })
@@ -44,6 +56,8 @@ export class PicCardComponent implements OnInit {
 
   whenLoaded() {
     this.loading = false;
+    console.log("pic card loaded : " + this.pic.name);
+    this.notifyParent.emit('done');
   }
 
 }

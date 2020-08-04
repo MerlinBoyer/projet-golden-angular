@@ -1,6 +1,7 @@
 <div class="component-title">
     <h1>{{album.name}}</h1>
     <h3>{{album.creation_date | date: 'dd-MM-yyyy'}}</h3>
+    <h3 *ngIf="lazy_album.pictures.length != album.pictures.length">Loading pic : {{lazy_album.pictures.length}} / {{album.pictures.length}}</h3>
     <hr/>
     <br/>
 </div>
@@ -13,8 +14,8 @@ clicker sur une photo l'affiche en grand
 télécharger une photo
 
 <div class="row itemsBlock album-container">
-    <div *ngFor="let pic of album.pictures; index as i" class="col-md-4 col-sm-6 col-12">
-         <app-pic-card [inputPic]="pic" [albumCode]="album.code" (click)="showBigPic(i)"></app-pic-card>
+    <div *ngFor="let pic of lazy_album.pictures; index as i" class="col-md-4 col-sm-6 col-12">
+         <app-pic-card [inputPic]="pic" [albumCode]="album.code" (click)="showBigPic(i)" (notifyParent)="notificationReceived($event)"></app-pic-card>
     </div>
  </div>
 

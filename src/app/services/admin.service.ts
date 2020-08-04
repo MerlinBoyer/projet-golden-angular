@@ -11,7 +11,8 @@ import { report } from 'process';
 })
 export class AdminService {
 
-  url: String = environment.urlAPI + '/admin'
+  url: String = environment.urlAPI + '/admin';
+  savedAlbum: Album;
   constructor(private http: HttpClient) { }
 
   registerAlbum(album: Album): Observable<any> {
@@ -46,4 +47,41 @@ export class AdminService {
 
     return this.http.post( this.url + '/savePhoto', uploadImageData, {reportProgress: true} );
   }
+
+
+  saveAlbum(album: Album) {
+    this.savedAlbum = album;
+  }
+
+  getSavedAlbum() {
+    return this.savedAlbum;
+  }
+
+  getAlbumById(id: number): Observable<any>  {
+    return this.http.get(this.url + '/album/' + id );
+  }
+
+  changeAlbumName(album: Album, oldName: String): Observable<any> {
+    const namesData = new FormData();
+    namesData.append('albumId', album.id.toString() );
+    namesData.append('albumName', album.name.toString() );
+    namesData.append('oldName', oldName.toString());
+    console.log("change alb names ");
+    
+    return this.http.post( this.url + '/album/changeAlbumName', namesData );
+  }
+
+  updateAlbumInfos(album: Album): Observable<any> {
+      let headers={
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+      }
+      album.pictures = [];
+      return this.http.put( this.url + '/album/update', album, headers);
+    }
+  
+    deleteAlbum( album: Album ): Observable<any> {
+      return this.http.delete( this.url + '/album/delete/' + album.id);
+    }
 }

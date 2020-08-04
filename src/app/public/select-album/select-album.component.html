@@ -9,7 +9,7 @@ chercher un album par nom
 <div class="form-groupe">
     <label for="nom">Nom d'un album</label>
     <input type="text" class="form-control" [(ngModel)]="searchName" name="nom" required/>
-    <button class="btn btn-outline-success" (click)="searchAlbumByName()">Chercher cet album</button>
+    <button class="btn btn-outline-success" (click)="searchAlbumByName()" disabled>Chercher cet album</button>
 
 </div>
 

@@ -1,1 +1,14 @@
-<p>admin-all-albums works!</p>
+<div class="component-title">
+    <img src="../../../assets/img/add-album.png">
+    <h1>Admin les albums de Manon</h1>
+    <hr/>
+    <br/>
+</div>
+
+
+
+<div class="album-container">
+
+<app-admin-album-card *ngFor="let album of albumList" [alb]="album"></app-admin-album-card>
+
+</div>

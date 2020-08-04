@@ -22,6 +22,9 @@ export enum KEY_CODE {
 export class PrintAlbumComponent implements OnInit {
 
   album: Album;
+  lazy_album: Album;  // once album is loaded, pictures are recursively pushed
+                      // into lazy_album to be loaded one by one in PicCardComponent
+                      // (avoid requesting server all pics at the same time)
   bigPicPath: String;
   bigPicIndex: number;
   loading: boolean;
@@ -48,6 +51,7 @@ export class PrintAlbumComponent implements OnInit {
   ngOnInit(): void {
     this.loading = false;
     this.bigPicPath = null;
+    this.lazy_album = new Album();
     this.album = this.publicService.getSavedAlbum();
     if( this.album && this.album.pictures && this.album.pictures.length !== 0) {
       return;
@@ -71,6 +75,7 @@ export class PrintAlbumComponent implements OnInit {
 
     //finally get album from api
     this.requestAlbum(id, code);
+    this.initLazyAlbum();
   }
 
 
@@ -97,11 +102,28 @@ export class PrintAlbumComponent implements OnInit {
         this.router.navigate(['/public/selectAlbum']);
       }
       this.album = res;
-      console.log(this.album);
+      // start constructing recursively pictures one by one
+      this.initLazyAlbum();
     })
   }
 
-  
+  // create a lazy album in chich pics will be pushed one by one
+  initLazyAlbum() {
+    this.lazy_album = Object.assign({}, this.album);
+    this.lazy_album.pictures = [];
+    if( this.album && this.album.pictures[0] ) {
+      this.lazy_album.pictures.push( this.album.pictures[0] );
+    }
+  }
+
+  // recursively add pictures to lazy album to display it one by one
+  // notification is received when a child PicCard has finished loaded its pic
+  notificationReceived(event: string) {
+    if( this.lazy_album.pictures.length === this.album.pictures.length) {
+      return;
+    }
+    this.lazy_album.pictures.push( this.album.pictures[this.lazy_album.pictures.length] );
+  }
 
 
   showBigPic(index: number) {

@@ -1,0 +1,21 @@
+.album-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 50px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: darkcyan;
+    border-radius: 3px;
+    background-color: lightgreen;
+    margin: 5% 5% 5% 5%;
+}
+.album-card:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
+.private {
+    background-color: rgb(216, 134, 123);
+}
