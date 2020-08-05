@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlAPI: "http://87.231.27.105:8081/ProjetGolden",
 };
