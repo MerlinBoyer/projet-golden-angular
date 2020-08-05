@@ -54,6 +54,7 @@ export class PrintAlbumComponent implements OnInit {
     this.lazy_album = new Album();
     this.album = this.publicService.getSavedAlbum();
     if( this.album && this.album.pictures && this.album.pictures.length !== 0) {
+      this.initLazyAlbum();
       return;
     }
 
@@ -75,7 +76,6 @@ export class PrintAlbumComponent implements OnInit {
 
     //finally get album from api
     this.requestAlbum(id, code);
-    this.initLazyAlbum();
   }
 
 

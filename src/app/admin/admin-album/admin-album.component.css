@@ -14,6 +14,8 @@
     height: 100%;
     background:rgba(255,255,255,0.5);
     display: flex;
+
+    z-index: 100;
 }
    
 .big-pic-container > img {
@@ -25,6 +27,7 @@
 
 
 .arrow {
+    z-index: 100;
     position: fixed;
     top: 50%;
     text-decoration: none;
@@ -55,6 +58,7 @@
 }
 
 .close {
+    z-index: 100;
     position: fixed;
     left: 5%;
     top: 5%;
@@ -104,4 +108,8 @@
     z-index: 1;
     bottom: 125%;
     left: 50%;
+}
+
+.formulaire {
+  z-index: 0;
 }

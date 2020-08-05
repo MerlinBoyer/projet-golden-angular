@@ -98,4 +98,8 @@ export class AdminService {
   deletePicture(pic: Photo): Observable<any> {
     return this.http.delete( this.url + '/photo/delete/' + pic.id);
   }
+
+  synchronizeFromDisk(): Observable<any> {
+    return this.http.get( this.url + '/synchronize');
+  }
 }

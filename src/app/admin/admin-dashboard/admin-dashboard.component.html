@@ -7,3 +7,21 @@
 <div class="btn-group" role="group" aria-label="Basic example">
     <button class="btn btn-outline-success my-2 my-sm-0" type="button" [routerLink]="[ '/admin/createAlbum']">Ajouter un album</button>
 </div>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button" [routerLink]="[ '/admin/allAlbums']">Voir les albums</button>
+</div>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="synchronizeFromDisk()">Synchroniser les albums</button>
+</div>
+
+
+
+
+
+<div class="loader-popup" *ngIf="loading loadingTemplate">
+    <span class="loader-text" id="myPopup">
+        Please Wait :) operation en cours... 
+    </span>
+  </div>
