@@ -80,3 +80,28 @@
   .close:after {
     transform: rotate(-45deg);
   }
+
+
+
+  .loader-popup {
+    display: inline-block;
+    cursor: pointer;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+  
+/* The actual popup (appears on top) */
+.loader-popup .loader-text {
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 8px;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+}

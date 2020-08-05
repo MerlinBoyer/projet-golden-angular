@@ -48,6 +48,27 @@ export class AdminService {
     return this.http.post( this.url + '/savePhoto', uploadImageData, {reportProgress: true} );
   }
 
+  addPic(album: Album, pic: Photo): Observable<any> {
+    
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', pic.image, pic.name.toString());
+    uploadImageData.append('album_id', album.id.toString());
+    uploadImageData.append('album_name', album.name.toString());
+
+    // return this.http.post( this.url + '/savePhoto', pic);
+    let headers={
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+      })
+    }
+    const req = new HttpRequest('POST', this.url.toString(), uploadImageData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.http.post( this.url + '/addPhoto', uploadImageData, {reportProgress: true} );
+  }
+
 
   saveAlbum(album: Album) {
     this.savedAlbum = album;
@@ -61,27 +82,20 @@ export class AdminService {
     return this.http.get(this.url + '/album/' + id );
   }
 
-  changeAlbumName(album: Album, oldName: String): Observable<any> {
-    const namesData = new FormData();
-    namesData.append('albumId', album.id.toString() );
-    namesData.append('albumName', album.name.toString() );
-    namesData.append('oldName', oldName.toString());
-    console.log("change alb names ");
-    
-    return this.http.post( this.url + '/album/changeAlbumName', namesData );
+  updateAlbumInfos(album: Album): Observable<any> {
+    let headers={
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+      })
+    }
+    return this.http.put( this.url + '/album/update', album, headers);
+  }
+  
+  deleteAlbum( album: Album ): Observable<any> {
+    return this.http.delete( this.url + '/album/delete/' + album.id);
   }
 
-  updateAlbumInfos(album: Album): Observable<any> {
-      let headers={
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
-      }
-      album.pictures = [];
-      return this.http.put( this.url + '/album/update', album, headers);
-    }
-  
-    deleteAlbum( album: Album ): Observable<any> {
-      return this.http.delete( this.url + '/album/delete/' + album.id);
-    }
+  deletePicture(pic: Photo): Observable<any> {
+    return this.http.delete( this.url + '/photo/delete/' + pic.id);
+  }
 }

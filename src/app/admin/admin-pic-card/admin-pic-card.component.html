@@ -8,7 +8,6 @@ j'affiche la photo en petit avec des infos
 j'ai un bouton telecharger
 j'affiche la photo en grand quand on me clique dessus -->
 
-
 <div class="picture-card">
     <img *ngIf="loading" src="../../../assets/img/loading-golden.png" alt="loading" />
     <img [hidden]="loading" (load)="whenLoaded()" [src]="imgUrl" />

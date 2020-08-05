@@ -44,17 +44,48 @@ ADMIN DE L'ALBUM
         </div>
     
         <div class="submit-btn">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="updateName()">Update</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="updateAlbum()">Update</button>
             <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="delete()">Delete</button>
         </div>
         
     </form>
 </div>
 
+<!-- ajout de photo -->
+<div class="formulaire" >
+    <form class="md-form" ngNativeValidate #f>
+        <div class="form-groupe">
+            <label for="photos">Ajouter des photos</label>
+            <div class="custom-file">
+                <input type="file" multiple  required (change)="onFilesChange($event)" class="custom-file-input" id="photos"
+                    aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" for="photos" *ngIf="selectedFiles.length === 0;else nbPictures">
+                    Choose pictures
+                </label>
+                <ng-template #nbPictures >
+                    <label class="custom-file-label" for="photos" id="photos-selected">
+                        {{selectedFiles.length}} pictures selected
+                    </label>
+                </ng-template>
+            </div>
+        </div>
+
+        <div class="submit-btn">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="addPictures()">Ajouter</button>
+        </div>
+    </form>
+</div>
+
+<div class="submit-btn">
+    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="deletePictures()">Supprimer les images sélectionnées</button>
+</div>
+
+
 
 <div class="row itemsBlock album-container">
     <div *ngFor="let pic of lazy_album.pictures; index as i" class="col-md-4 col-sm-6 col-12">
-         <app-admin-pic-card [inputPic]="pic" [albumCode]="album.code" (click)="showBigPic(i)" (notifyParent)="notificationReceived($event)"></app-admin-pic-card>
+        <mat-checkbox (change)="updateCheck(pic)"> </mat-checkbox>
+        <app-admin-pic-card [inputPic]="pic" [albumCode]="album.code" (click)="showBigPic(i)" (notifyParent)="notificationReceived($event)"></app-admin-pic-card>
     </div>
  </div>
 
@@ -67,3 +98,10 @@ ADMIN DE L'ALBUM
     <span class="arrow previous round" (click)="goPrevious()">&#8249;</span>
     <span class="arrow next round" (click)="goNext()">&#8250;</span>
 </div>
+
+
+<div class="loader-popup" *ngIf="loading loadingTemplate">
+    <span class="loader-text" id="myPopup">
+        Please Wait :) operation en cours... 
+    </span>
+  </div>

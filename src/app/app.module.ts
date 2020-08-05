@@ -18,7 +18,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { RegisterAdminComponent } from './auth/register-admin/register-admin.component';
 import { AdminGuard }      from './auth/admin.guard';
 import { BasicAuthHtppInterceptorService } from './services/interceptors/basic-auth-http-interceptor.service';
-import { AdminAlbumComponent }             from './admin/admin-album/admin-album.component';
+import { AdminAlbumComponent, YouhouPopup as yPopup }             from './admin/admin-album/admin-album.component';
 import { AdminDashboardComponent }         from './admin/admin-dashboard/admin-dashboard.component';
 import { Admin }  from './models/admin';
 import { AlbumCreationComponent, AlbumPopup, YouhouPopup } from './admin/album-creation/album-creation.component';
@@ -31,7 +31,7 @@ import { AdminAllAlbumsComponent }  from './admin/admin-all-albums/admin-all-alb
 import { AdminPicCardComponent }    from './admin/admin-pic-card/admin-pic-card.component';
 import { AlbumCardComponent, PopupAlbumCode }       from './public/album-card/album-card.component';
 import { AlbumCardComponent as AdminAlbumCardComponent }       from './admin/album-card/album-card.component';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -49,6 +49,7 @@ import { AlbumCardComponent as AdminAlbumCardComponent }       from './admin/alb
     AlbumCreationComponent,
     AlbumPopup,
     YouhouPopup,
+    yPopup,
     PrintAlbumComponent,
     PicCardComponent,
     SelectAlbumComponent,
@@ -67,6 +68,7 @@ import { AlbumCardComponent as AdminAlbumCardComponent }       from './admin/alb
     MatDialogModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    MatCheckboxModule,
     FlashMessagesModule.forRoot()
   ],
   providers: [

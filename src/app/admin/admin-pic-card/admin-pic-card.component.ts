@@ -5,10 +5,10 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { EventEmitter } from '@angular/core';
 
+
+
 var base64data;
 let mySrc;
-
-
 
 /*
 * Ce compo prend en param une id d'une pic et genere une src de <img>
