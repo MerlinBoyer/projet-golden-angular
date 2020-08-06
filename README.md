@@ -3,7 +3,7 @@
 Angular :
 cd dans proj angular
 $ ng build --prod
-$ sudo rm -r /var/www/html
+$ sudo rm -r /var/www/html/*
 $ sudo cp -r ./dist/goldenProject/* /var/www/html
 
 
