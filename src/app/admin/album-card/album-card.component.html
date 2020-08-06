@@ -1,5 +1,5 @@
 <div class="album-card" (click)="onClicked()" *ngIf="album.visibility !== 0; else privateAlbumInstead">
-    Album {{album.name}}
+    {{album.name}}
 </div>
 
 <ng-template #privateAlbumInstead>
