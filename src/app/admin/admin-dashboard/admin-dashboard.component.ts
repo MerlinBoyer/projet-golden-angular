@@ -32,7 +32,6 @@ export class AdminDashboardComponent implements OnInit {
     this.loadMode();
     this.adminService.synchronizeFromDisk().subscribe( res => {
       this.notLoadMode();
-      console.log("synchro done");
     })
   }
 

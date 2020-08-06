@@ -16,7 +16,6 @@ export class SelectAlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAllAlbums().subscribe( result => {
-      //console.log(JSON.stringify( result ));
       this.albumList = [];
       for(let i =0; i<result.length; i++) {
         this.albumList.push(result[i]);

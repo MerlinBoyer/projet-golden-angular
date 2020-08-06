@@ -173,7 +173,6 @@ export class AdminAlbumComponent implements OnInit {
   updateAlbum() {
     this.album.visibility = this.visibilityForm.get("state").value;
     this.adminService.updateAlbumInfos( this.album ).subscribe( res => {
-      console.log(res);
     })
   }
 
@@ -211,7 +210,6 @@ export class AdminAlbumComponent implements OnInit {
     p.image = file;
     p.album.id = this.album.id;
     this.adminService.addPic(this.album, p).subscribe(res => {
-      // console.log("saved image : ", this.currentPicToSend+1, "/", this.selectedFiles.length);
       this.currentPicToSend++;
       this.sendRecursivePic();
     }, err => {
@@ -240,7 +238,6 @@ export class AdminAlbumComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
         this.adminService.deleteAlbum( this.album ).subscribe( res => {
-          console.log(res);
           this._flashMessagesService.show("Album supprimé !", { cssClass: 'alert-success', timeout: 5000 });
           this.router.navigate(['/admin/allAlbums']);
         })
@@ -249,8 +246,6 @@ export class AdminAlbumComponent implements OnInit {
   }
 
   updateCheck(pic: Photo) {
-    console.log("update check");
-    
     const index: number = this.picturesToDelete.indexOf(pic.id);
     if (index !== -1) {
       this.picturesToDelete.splice(index, 1);

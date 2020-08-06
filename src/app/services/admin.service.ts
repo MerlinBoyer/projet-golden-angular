@@ -16,8 +16,6 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   registerAlbum(album: Album): Observable<any> {
-    console.log("ready to register : " + album);
-
     let headers={
       headers: new HttpHeaders({
           'Content-Type': 'application/json'

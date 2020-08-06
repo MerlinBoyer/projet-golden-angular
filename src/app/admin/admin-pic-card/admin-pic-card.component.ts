@@ -42,7 +42,7 @@ export class AdminPicCardComponent implements OnInit {
   }
 
   onClick(){
-    console.log(this.pic);
+    
   }
 
   loadPic() {
@@ -56,7 +56,6 @@ export class AdminPicCardComponent implements OnInit {
 
   whenLoaded() {
     this.loading = false;
-    console.log("pic card loaded : " + this.pic.name);
     this.notifyParent.emit('done');
   }
 

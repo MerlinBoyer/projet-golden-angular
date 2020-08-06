@@ -75,7 +75,6 @@ export class AlbumCreationComponent implements OnInit {
         this.notLoadMode();
         return;
       }
-      console.log("Album registered ? -> " + JSON.stringify(res));
       this.album.id = res.id;
       this.currentPicToSend = 0;
       this.sendRecursivePic();
@@ -102,7 +101,6 @@ export class AlbumCreationComponent implements OnInit {
     p.image = file;
     p.album.id = this.album.id;
     this.adminService.sendPic(this.album, p).subscribe(res => {
-      // console.log("saved image : ", this.currentPicToSend+1, "/", this.selectedFiles.length);
       this.currentPicToSend++;
       this.sendRecursivePic();
     }, err => {

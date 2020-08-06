@@ -42,7 +42,6 @@ export class PicCardComponent implements OnInit {
   }
 
   onClick(){
-    console.log(this.pic);
   }
 
   loadPic() {
@@ -56,7 +55,6 @@ export class PicCardComponent implements OnInit {
 
   whenLoaded() {
     this.loading = false;
-    console.log("pic card loaded : " + this.pic.name);
     this.notifyParent.emit('done');
   }
 

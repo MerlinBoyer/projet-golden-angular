@@ -52,7 +52,6 @@ authenticate(username, password) {
 }
 
 redirectBadCredentials(){
-  console.log("bad credential");
   this.router.navigate(['public/login']);
 }
 

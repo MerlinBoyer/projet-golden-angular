@@ -13,8 +13,6 @@ export class AdminGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.authService.isUserAdmin())
       return true;
-
-    console.log("vous devez etre admin !");
     
     this.router.navigate(['public/login']);
     return false;
