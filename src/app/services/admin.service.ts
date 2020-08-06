@@ -83,12 +83,7 @@ export class AdminService {
   }
 
   updateAlbumInfos(album: Album): Observable<any> {
-    let headers={
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-      })
-    }
-    return this.http.put( this.url + '/album/update', album, headers);
+    return this.http.put( this.url + '/album/update', album);
   }
   
   deleteAlbum( album: Album ): Observable<any> {

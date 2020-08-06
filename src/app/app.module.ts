@@ -32,6 +32,7 @@ import { AdminPicCardComponent }    from './admin/admin-pic-card/admin-pic-card.
 import { AlbumCardComponent, PopupAlbumCode }       from './public/album-card/album-card.component';
 import { AlbumCardComponent as AdminAlbumCardComponent }       from './admin/album-card/album-card.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AlbumsPipe } from './pipes/albums.pipe';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AlbumCardComponent,
     AdminAlbumCardComponent,
     PopupAlbumCode,
+    AlbumsPipe,
   ],
   imports: [
     BrowserModule,

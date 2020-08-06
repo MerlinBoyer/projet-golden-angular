@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, PipeTransform } from '@angular/core';
 import { PublicService } from 'src/app/services/public.service';
 import { Album } from 'src/app/models/album';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -47,6 +47,7 @@ export class PrintAlbumComponent implements OnInit {
         this.closeBigPic();
       }
     }
+
     
   ngOnInit(): void {
     this.loading = false;

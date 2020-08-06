@@ -57,9 +57,7 @@ redirectBadCredentials(){
 }
 
 redirectOnSuccess(username: String){
-  console.log("logged");
-  
-  this.router.navigate(['public/home']);
+  this.router.navigate(['admin/dashboard']);
 }
 
 isUserLoggedIn(): boolean {

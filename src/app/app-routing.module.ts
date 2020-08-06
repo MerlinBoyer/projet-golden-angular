@@ -17,7 +17,7 @@ const routes: Routes = [
   {path:'', redirectTo : 'public/home', pathMatch:'full'},
 
   
-  {path : 'public/home',         component:HomeComponent},
+  {path : 'public/home',         component:SelectAlbumComponent},
   {path : 'public/login',        component:LoginComponent},
   {path : 'public/logout',       component:LogoutComponent},
   {path : 'public/printAlbum',   component:PrintAlbumComponent},

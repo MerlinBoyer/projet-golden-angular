@@ -6,9 +6,15 @@
 </div>
 
 
+<div class="form-groupe">
+    <label for="nom">Chercher un album par nom : </label>
+    <input type="text" class="form-control" [(ngModel)]="searchName" name="nom" required/>
+    <hr/>
+</div>
+
 
 <div class="album-container">
 
-<app-admin-album-card *ngFor="let album of albumList" [alb]="album"></app-admin-album-card>
+<app-admin-album-card *ngFor="let album of albumList | albumsSearch : searchName" [alb]="album"></app-admin-album-card>
 
 </div>
