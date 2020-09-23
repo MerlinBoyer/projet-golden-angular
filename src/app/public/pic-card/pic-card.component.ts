@@ -37,7 +37,7 @@ export class PicCardComponent implements OnInit {
     if(!this.albumCode) {
       this.albumCode = 'default-code';
     }
-    this.imgUrl = environment.urlAPI + "/public/photos/getImg/" + this.inputPic.id + '/' + this.albumCode;
+    this.imgUrl = environment.urlAPI + "/public/photos/getCompressedImg/" + this.inputPic.id + '/' + this.albumCode;
     this.loadPic();
   }
 

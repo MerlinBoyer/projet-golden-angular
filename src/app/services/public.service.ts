@@ -35,6 +35,7 @@ export class PublicService {
     return this.http.get(this.url + '/album/' + id + '/' + code);
   }
 
+  // get only photo metadata
   getPhotoById(id:number, code: String): Observable<any> {
     if(code === '') {
       code='public';
@@ -48,5 +49,13 @@ export class PublicService {
     }
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     return this.http.get(this.url + '/photos/getImg/' + id + '/' + code, {headers, responseType: 'blob' });
+  }
+
+  getCompressedImgById(id: number, code: String): Observable<any> {
+    if(code === '') {
+      code='public';
+    }
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.get(this.url + '/photos/getCompressedImg/' + id + '/' + code, {headers, responseType: 'blob' });
   }
 }

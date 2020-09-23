@@ -135,7 +135,7 @@ export class PrintAlbumComponent implements OnInit {
     if( !this.album.code ) {
       this.album.code = 'default-code';
     }
-    this.bigPicPath = environment.urlAPI + "/public/photos/getImg/" + p.id + '/' + this.album.code;
+    this.bigPicPath = environment.urlAPI + "/public/photos/getCompressedImg/" + p.id + '/' + this.album.code;
     this.loading = true;
   }
   closeBigPic() {
