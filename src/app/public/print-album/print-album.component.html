@@ -1,26 +1,40 @@
-<div class="component-title">
-    <h1>{{album.name}}</h1>
-    <h3>{{album.creation_date | date: 'dd-MM-yyyy'}}</h3>
-    <h3 *ngIf="lazy_album.pictures.length != album.pictures.length">Loading pic : {{lazy_album.pictures.length}} / {{album.pictures.length}}</h3>
-    <hr/>
-    <br/>
-</div>
 
-<button class="btn btn-outline-danger my-2 my-sm-0" type="button"  [routerLink]="[ '/public/selectAlbum']"><- Retour aux albums</button>
-<br>
+<span [className]="isDownloading ? 'busy' : ''">
 
-<div class="row itemsBlock album-container">
-    <div *ngFor="let pic of lazy_album.pictures; index as i" class="col-md-4 col-sm-6 col-12">
-         <app-pic-card [inputPic]="pic" [albumCode]="album.code" (click)="showBigPic(i)" (notifyParent)="notificationReceived($event)"></app-pic-card>
+    <div class="component-title">
+        <h1>{{album.name}}</h1>
+        <h3>{{album.creation_date | date: 'dd-MM-yyyy'}}</h3>
+        <h3 *ngIf="lazy_album.pictures.length != album.pictures.length">Loading pic : {{lazy_album.pictures.length}} / {{album.pictures.length}}</h3>
+        <hr/>
+        <br/>
+        <div *ngIf="isDownloading">
+            <h1>Téléchargement en préparation, veuillez patienter...</h1>
+            <h3>(l'opération peut prendre un petit moment :/)</h3>
+        </div>
     </div>
- </div>
+   
 
-<div *ngIf="bigPicPath">
-    <div class="big-pic-container">
-        <img *ngIf="loading" src="../../../assets/img/loading-golden.png" alt="loading" />
-        <img [hidden]="loading" class="big-pic" (load)="whenLoaded()" [src]="bigPicPath" />
+    <button class="btn btn-outline-danger my-2 my-sm-0" type="button"  [routerLink]="[ '/public/selectAlbum']"><- Retour aux albums</button>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="button"  (click)="downloadAlbum()"> télécharger cet album en full HD</button>
+   
+
+    <br>
+
+    <div class="row itemsBlock album-container">
+        <div *ngFor="let pic of lazy_album.pictures; index as i" class="col-md-4 col-sm-6 col-12">
+            <app-pic-card [inputPic]="pic" [albumCode]="album.code" (click)="showBigPic(i)" (notifyParent)="notificationReceived($event)"></app-pic-card>
+        </div>
     </div>
-    <span class="close" (click)="closeBigPic()"></span>
-    <span class="arrow previous round" (click)="goPrevious()">&#8249;</span>
-    <span class="arrow next round" (click)="goNext()">&#8250;</span>
-</div>
+
+    <div *ngIf="bigPicPath">
+        <div class="big-pic-container">
+            <img *ngIf="loading" src="../../../assets/img/loading-golden.png" alt="loading" />
+            <img [hidden]="loading" class="big-pic" (load)="whenLoaded()" [src]="bigPicPath" />
+        </div>
+        <span class="close" (click)="closeBigPic()"></span>
+        <span class="arrow previous round" (click)="goPrevious()">&#8249;</span>
+        <span class="arrow next round" (click)="goNext()">&#8250;</span>
+    </div>
+
+
+</span>

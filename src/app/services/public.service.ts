@@ -58,4 +58,14 @@ export class PublicService {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     return this.http.get(this.url + '/photos/getCompressedImg/' + id + '/' + code, {headers, responseType: 'blob' });
   }
+
+  downloadAlbumById(id: number, code: String): Observable<any> {
+    if(code === '') {
+      code='public';
+    } 
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.get(this.url + '/album/download/' + id + '/' + code, {
+      headers,
+      responseType: 'arraybuffer' });
+  }
 }

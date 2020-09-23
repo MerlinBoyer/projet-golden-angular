@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 import { HomeComponent }   from './public/home/home.component';
 import { FooterComponent } from './footer/footer.component';

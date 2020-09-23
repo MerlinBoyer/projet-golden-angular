@@ -28,6 +28,8 @@ export class PrintAlbumComponent implements OnInit {
   bigPicPath: String;
   bigPicIndex: number;
   loading: boolean;
+  isDownloading: boolean;
+  progressBar;
   constructor(private publicService: PublicService,
     private _flashMessagesService: FlashMessagesService,
     private router: Router) { }
@@ -51,6 +53,7 @@ export class PrintAlbumComponent implements OnInit {
     
   ngOnInit(): void {
     this.loading = false;
+    this.isDownloading = false;
     this.bigPicPath = null;
     this.lazy_album = new Album();
     this.album = this.publicService.getSavedAlbum();
@@ -105,6 +108,25 @@ export class PrintAlbumComponent implements OnInit {
       this.album = res;
       // start constructing recursively pictures one by one
       this.initLazyAlbum();
+    })
+  }
+
+  downloadAlbum() {
+    this.isDownloading = true;
+    var id = this.album.id;
+    var code = this.album.code;
+    if(!id) {
+        this._flashMessagesService.show("Probleme survenu, rééssayez", { cssClass: 'alert-danger', timeout: 3000 });
+        this.router.navigate(['/public/selectAlbum']);
+      }
+
+    this.publicService.downloadAlbumById(id, code).subscribe( data => {
+        this.isDownloading = false;
+        const blob = new Blob([data], {
+            type: 'application/zip'
+          });
+          const url = window.URL.createObjectURL(blob);
+          window.open(url);
     })
   }
 

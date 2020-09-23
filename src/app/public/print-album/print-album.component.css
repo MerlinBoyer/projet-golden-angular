@@ -2,6 +2,10 @@
     padding: 5% 5% 5% 5%;
 }
 
+.busy {
+  cursor: wait;
+}
+
 .big-pic-container{
     position:fixed;
     padding:0;
