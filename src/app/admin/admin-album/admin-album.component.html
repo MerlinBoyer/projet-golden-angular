@@ -50,6 +50,28 @@
     </form>
 </div>
 
+<hr>
+
+<!-- ajout de photo -->
+<div class="formulaire" >
+    <form class="md-form" ngNativeValidate #f>
+        <div class="form-groupe">
+            <label for="compressionFactor">Facteur de compression</label>
+            <input type="number" step="0.01" class="form-control" [(ngModel)]="compressionFactor" name="compressionFactor"/>
+        </div>
+        <div class="form-groupe">
+            <label for="maxResizedImgSize">Taille Max</label>
+            <input type="number" step="0.01" class="form-control" [(ngModel)]="maxResizedImgSize" name="maxResizedImgSize"/>
+        </div>
+
+        <div class="submit-btn">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="compressAlbum()">Compresser avec ces parametres</button>
+        </div>
+    </form>
+</div>
+
+<hr>
+
 <!-- ajout de photo -->
 <div class="formulaire" >
     <form class="md-form" ngNativeValidate #f>

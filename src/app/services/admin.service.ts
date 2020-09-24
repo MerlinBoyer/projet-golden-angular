@@ -54,17 +54,29 @@ export class AdminService {
     uploadImageData.append('album_name', album.name.toString());
 
     // return this.http.post( this.url + '/savePhoto', pic);
-    let headers={
-      headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-      })
-    }
-    const req = new HttpRequest('POST', this.url.toString(), uploadImageData, {
-      reportProgress: true,
-      responseType: 'json'
-    });
+    // let headers={
+    //   headers: new HttpHeaders({
+    //       'Content-Type': 'application/json'
+    //   })
+    // }
+    // const req = new HttpRequest('POST', this.url.toString(), uploadImageData, {
+    //   reportProgress: true,
+    //   responseType: 'json'
+    // });
 
     return this.http.post( this.url + '/addPhoto', uploadImageData, {reportProgress: true} );
+  }
+
+
+  compressAlbum(id: number, compressionFactor: number, maxImgSize: number,
+    maxResizedW: number, maxResizedH: number): Observable<any> {
+    const compressParams = new FormData();
+    compressParams.append('albumId', id.toString());
+    compressParams.append('compressionFactor', compressionFactor.toString());
+    compressParams.append('maxImgSize', maxImgSize.toString());
+    compressParams.append('maxResizedW', maxResizedW.toString());
+    compressParams.append('maxResizedH', maxResizedH.toString());
+    return this.http.post(this.url + '/compressAlbum',compressParams, {reportProgress: true} );
   }
 
 

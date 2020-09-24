@@ -41,6 +41,12 @@ export class AdminAlbumComponent implements OnInit {
   currentPicTodelete: number = 0;
   checked: boolean = false;
 
+  // compression parameters
+  compressionFactor: number = 0.9;
+  maxResizedImgSize: number = 1000;
+  maxResizedImgW: number = 0;   // not used
+  maxResizedImgH: number = 0;   // not used
+
   // link boolean & text to choose album privacy policy in dialog box
   visibilityStates = [
     {name: 'Privé', value: 0},
@@ -252,6 +258,15 @@ export class AdminAlbumComponent implements OnInit {
     } else {
       this.picturesToDelete.push(pic.id)
     }
+  }
+  
+  compressAlbum() {
+    console.log("compression");
+    if(!this.album) return;
+    this.loadMode();
+    this.adminService.compressAlbum(this.album.id, this.compressionFactor, this.maxResizedImgSize, this.maxResizedImgW, this.maxResizedImgH).subscribe( res => {
+      this.notLoadMode();
+    })
   }
 
   deletePictures() {
