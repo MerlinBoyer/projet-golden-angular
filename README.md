@@ -4,7 +4,7 @@ Angular :
 cd dans proj angular
 $ ng build --prod
 $ sudo rm -r /var/www/html/*
-si besoin ssh : $pscp -r ./dist/goldenProject/* pi@DOMAIN_NAME/home/pi/dist-golden/dist-angular
+si besoin ssh : $pscp -r ./dist/goldenProject/* pi@DOMAIN_NAME:/home/pi/dist-golden/dist-angular
 $ sudo cp -r ./dist/* /var/www/html
 
 
