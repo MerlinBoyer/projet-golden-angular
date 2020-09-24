@@ -3,7 +3,8 @@
 Angular :
 cd dans proj angular
 $ ng build --prod
-$ sudo rm -r /var/www/html/*
+->  /!\ recuperer le dossier assets : sudo cp -r /var/www/html/assets ./dist
+$ sudo rm -r /var/www/html/*   
 si besoin ssh : $pscp -r ./dist/goldenProject/* pi@DOMAIN_NAME:/home/pi/dist-golden/dist-angular
 $ sudo cp -r ./dist/* /var/www/html
 
