@@ -122,6 +122,7 @@ export class PrintAlbumComponent implements OnInit {
 
     this.publicService.downloadAlbumById(id, code).subscribe( data => {
         this.isDownloading = false;
+        this._flashMessagesService.show("Si la fenetre de telechargement ne s'ouvre pas, vérifiez que votre navigateur ne l'a pas bloqué", { cssClass: 'alert-warning', timeout: 6000 });
         const blob = new Blob([data], {
             type: 'application/zip'
           });
